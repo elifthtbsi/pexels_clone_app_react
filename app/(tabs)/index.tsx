@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { Text, View } from '@/components/Themed';
 
@@ -7,10 +8,17 @@ export default function TabOneScreen() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigation = useNavigation();
+
   const handleLogin = () => {
-    // Kullanıcı adı ve şifreyi kullanarak giriş yapma işlemi burada yapılabilir
+    // Handle login logic here
     console.log('username:', username);
     console.log('password:', password);
+  };
+
+  const handleSignUp = () => {
+    // Navigate to Sign Up screen
+    navigation.navigate('SignUpScreen'); // Ensure 'SignUpScreen' matches your actual route name
   };
 
   return (
@@ -24,7 +32,6 @@ export default function TabOneScreen() {
       </Text>
 
       <View style={{ height: 20 }} />
-
 
       <View style={styles.form}>
         <TextInput
@@ -45,7 +52,14 @@ export default function TabOneScreen() {
         </TouchableOpacity>
       </View>
 
-      {/* Boşluk */}
+      {/* Add spacing */}
+      <View style={{ height: 20 }} />
+
+      {/* Add Sign Up link */}
+      <TouchableOpacity onPress={handleSignUp}>
+        <Text style={styles.signUpText}>Don't have an account? Sign Up</Text>
+      </TouchableOpacity>
+
       <View style={{ height: 20 }} />
 
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
@@ -86,6 +100,12 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
+  },
+  signUpText: {
+    color: '#000',
+    fontSize: 16,
+    textAlign: 'center',
+    textDecorationLine: 'underline',
   },
   separator: {
     marginVertical: 30,
